@@ -10,8 +10,7 @@ Original file is located at
 # !pip install pdfminer 
 # !pip install pypdf2
 
-import re
-import spacy
+
 from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
@@ -50,7 +49,7 @@ def extract_text_from_pdf(pdf_path):
     output.close()
     # Return the text
     return text
-text= extract_text_from_pdf("Survey_on_Device_to_Device_D2D_Communication_for_5GB.pdf")
+# text= extract_text_from_pdf("Survey_on_Device_to_Device_D2D_Communication_for_5GB.pdf")
 
 # text
 
@@ -65,7 +64,7 @@ def split_text_into_sentences_and_words(text):
     sentences = [tokenizer.tokenize(sentence) for sentence in sentences]
 
     return sentences
-sentences = split_text_into_sentences_and_words(text)
+# sentences = split_text_into_sentences_and_words(text)
 
 # sentences
 
@@ -80,7 +79,7 @@ def remove_stop_words(sentences):
         filtered_sentences.append(filtered_words)
 
     return filtered_sentences
-filtered_sentences = remove_stop_words(sentences)
+# filtered_sentences = remove_stop_words(sentences)
 
-print(filtered_sentences)
+# print(filtered_sentences)
 
