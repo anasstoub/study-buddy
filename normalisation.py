@@ -11,17 +11,98 @@ Original file is located at
 # !pip install pypdf2
 
 
+# from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+# from pdfminer.converter import TextConverter
+# from pdfminer.layout import LAParams
+# from pdfminer.pdfpage import PDFPage
+# from io import StringIO
+# import io
+# import PyPDF2
+# import nltk
+# from nltk.tokenize import PunktSentenceTokenizer
+# from nltk.tokenize import RegexpTokenizer
+# from nltk.corpus import stopwords
+# import spacy
+
+# def extract_text_from_pdf(pdf_path):
+#     # Initialize the PDF resource manager
+#     rsrcmgr = PDFResourceManager()
+#     # Initialize the StringIO object to store the text
+#     output = StringIO()
+#     # Initialize the TextConverter object
+#     device = TextConverter(rsrcmgr, output, laparams=LAParams())
+#     # Initialize the PDFPageInterpreter object
+#     interpreter = PDFPageInterpreter(rsrcmgr, device)
+#     # Open the PDF file
+#     with open(pdf_path, 'rb') as f:
+#         # Iterate over the pages of the PDF
+#         for page in PDFPage.get_pages(f):
+#             # Process the page
+#             interpreter.process_page(page)
+#     # Close the TextConverter object
+#     device.close()
+#     # Get the text from the StringIO object
+#     text = output.getvalue()
+#         # Lowercase the text
+#     text = text.lower()
+#     text = text.replace('\n', '')
+#     # Close the StringIO object
+#     output.close()
+#     # Return the text
+#     return text
+# # text= extract_text_from_pdf("Survey_on_Device_to_Device_D2D_Communication_for_5GB.pdf")
+
+# # text
+
+# def split_text_into_sentences_and_words(text):
+#     # Create a RegexpTokenizer
+#     tokenizer = RegexpTokenizer(r'\w+')
+
+#     # Split the text into sentences
+#     sentences = nltk.sent_tokenize(text)
+
+#     # Split each sentence into a list of words
+#     sentences = [tokenizer.tokenize(sentence) for sentence in sentences]
+
+#     return sentences
+
+# def split_text_into_sentences(text):
+#     nlp = spacy.load("en_core_web_sm")
+#     doc = nlp(text)
+#     sentences = [sent.text for sent in doc.sents]
+#     return sentences
+# # sentences = split_text_into_sentences_and_words(text)
+
+# # sentences
+
+# def remove_stop_words(sentences):
+#     # Create a set of stop words
+#     stop_words = set(stopwords.words('english'))
+
+#     # Remove stop words from each sentence
+#     filtered_sentences = []
+#     for sentence in sentences:
+#         filtered_words = [word for word in sentence if word.lower() not in stop_words]
+#         filtered_sentences.append(filtered_words)
+
+#     return filtered_sentences
+# filtered_sentences = remove_stop_words(sentences)
+
+# print(filtered_sentences)
+# ------------------------------------------------------------------------------------------------------------------
 from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
 from io import StringIO
-import io
-import PyPDF2
+
+
 import nltk
-from nltk.tokenize import PunktSentenceTokenizer
+
 from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
+import spacy
+
 
 def extract_text_from_pdf(pdf_path):
     # Initialize the PDF resource manager
@@ -64,10 +145,31 @@ def split_text_into_sentences_and_words(text):
     sentences = [tokenizer.tokenize(sentence) for sentence in sentences]
 
     return sentences
+
+def split_text_into_sentences(text):
+    nlp = spacy.load("en_core_web_sm")
+    doc = nlp(text)
+    sentences = [sent.text for sent in doc.sents]
+    return sentences
 # sentences = split_text_into_sentences_and_words(text)
 
 # sentences
-
+# -----------------------------------------------------------------------------------------------------------------
+# def split_text_into_sentences(text):
+#     nlp = spacy.load("en_core_web_sm")
+#     doc = nlp(text)
+#     sentences = []
+#     start_pos = 0
+#     for sent in doc.sents:
+#         end_pos = start_pos + len(sent.text)
+#         sentences.append({
+#             'sentence': sent.text,
+#             'start_pos': start_pos,
+#             'end_pos': end_pos
+#         })
+#         start_pos = end_pos
+#     return sentences
+# -----------------------------------------------------------------------------------------------------------------
 def remove_stop_words(sentences):
     # Create a set of stop words
     stop_words = set(stopwords.words('english'))
@@ -82,4 +184,4 @@ def remove_stop_words(sentences):
 # filtered_sentences = remove_stop_words(sentences)
 
 # print(filtered_sentences)
-
+# -----------------------------------------------------------------------------------------------------------------
