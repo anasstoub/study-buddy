@@ -44,9 +44,9 @@ async def extract_pdf_text(pdf_file: UploadFile = File(..., media_type="applicat
     # split the text into sentences and words
     sentences = split_text_into_sentences(text)
     # Return the text
-    print(f"Sentences: {sentences}")
+    return(f"Sentences: {sentences}")
 
-    return {'sentences': sentences}
+    # return {'sentences': sentences}
 
 @app.post("/find-similar-sentences/")
 async def find_similar_sentences(question: str): #, sentences: List[str]
