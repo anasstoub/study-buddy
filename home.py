@@ -1,5 +1,6 @@
 import streamlit as st
 from PIL import Image
+import os
 # sidebar
 
 
@@ -8,10 +9,11 @@ st.set_page_config(page_title="Home")
 
 # Define columns for logo and app name
 logo_col, name_col = st.columns([1, 4])
-
+current_dir = os.path.dirname(os.path.abspath(__file__))
+logo_path = os.path.join(current_dir, 'logo.png')
 # Add logo to the logo column
 with logo_col:
-    st.image(Image.open('logo.png'), width=150)
+    st.image(Image.open(logo_path), width=150)
 
 # Add app name to the name column
 with name_col:
